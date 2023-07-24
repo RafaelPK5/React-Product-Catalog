@@ -3,6 +3,7 @@ import './Cadastro.css'
 import Popup from "../Basic/PopUp";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import Footer from "../Basic/Footer";
 
 
 function Cadastro() {
@@ -33,67 +34,70 @@ function Cadastro() {
 
     const handleSubmit = (e) => {
         e.preventDefault();
-        // axios.post('http://localhost:8080/users', formData).then(response =>{
-        //     console.log(response)
-        // })
+        axios.post('http://localhost:8080/users', formData).then(response =>{
+            console.log(response)
+        })
         console.log(formData);
         navigate('/')
     };
 
     return (
-        <form className="form-cadastro" onSubmit={handleSubmit}>
-            <div className="caixa">
-                <h1 id="P">ProCad</h1>
-                <h1>Cadastre-se</h1>
-            </div>
-            <label>
-                Nome:
-                <input
-                    type="text"
-                    name="name"
-                    value={formData.name}
-                    onChange={handleChange}
-                    required
-                />
-            </label>
+        <div className="App">
+            <form className="form-cadastro" onSubmit={handleSubmit}>
+                <div className="caixa">
+                    <h1 id="P">ProCad</h1>
+                    <h1>Cadastre-se</h1>
+                </div>
+                <label>
+                    Nome:
+                    <input
+                        type="text"
+                        name="name"
+                        value={formData.name}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
 
-            <label>
-                Email:
-                <input
-                    type="email"
-                    name="email"
-                    value={formData.email}
-                    onChange={handleChange}
-                    required
-                />
-            </label>
+                <label>
+                    Email:
+                    <input
+                        type="email"
+                        name="email"
+                        value={formData.email}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
 
-            <label>
-                Telefone:
-                <input
-                    type="tel"
-                    name="phone"
-                    value={formData.phone}
-                    onChange={handleChange}
-                    required
-                />
-            </label>
+                <label>
+                    Telefone:
+                    <input
+                        type="tel"
+                        name="phone"
+                        value={formData.phone}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
 
-            <label>
-                Senha:
-                <input
-                    type="password"
-                    name="password"
-                    value={formData.password}
-                    onChange={handleChange}
-                    required
-                />
-            </label>
-            {mostrarPopup && (
-                <Popup mostrar={mostrarPopup} fecharPopup={fecharPopup} />)
-            }
-            <button type="submit">Cadastrar</button>
-        </form>
+                <label>
+                    Senha:
+                    <input
+                        type="password"
+                        name="password"
+                        value={formData.password}
+                        onChange={handleChange}
+                        required
+                    />
+                </label>
+                {mostrarPopup && (
+                    <Popup mostrar={mostrarPopup} fecharPopup={fecharPopup} />)
+                }
+                <button type="submit">Cadastrar</button>
+            </form>
+            <Footer/>
+        </div>
     );
 }
 

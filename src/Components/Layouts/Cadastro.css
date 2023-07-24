@@ -30,3 +30,15 @@
 .form-cadastro button:hover {
   background-color: #0056b3;
 }
+
+.App {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: #f2f2f2;
+  border-radius: 5px;
+  height: 650px;
+  width: 500px;
+  margin-bottom: 50px;
+}

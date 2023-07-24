@@ -1,11 +1,9 @@
 .App {
   display: flex;
   flex-direction: column;
-  align-items: center;
-  justify-content: center;
   background-color: #f2f2f2;
   border-radius: 5px;
-  height: 600px;
+  height: 650px;
   width: 500px;
   margin-bottom: 50px;
 }
@@ -14,9 +12,6 @@ body {
   margin: 0;
   padding: 0;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
   height: 100vh;
   background-image: url('/public/blob-scene-haikei.png');
   background-repeat: no-repeat;

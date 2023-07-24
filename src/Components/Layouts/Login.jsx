@@ -2,11 +2,12 @@ import React, { useState } from "react";
 import axios from 'axios'
 import Popup from "../Basic/PopUp";
 import './Login.css'
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import Footer from "../Basic/Footer";
 
 function Login(mostrarlogin) {
     if (!mostrarlogin) return null;
-
+    const navigate = useNavigate()
     const [user, setUser] = useState({
         email: '',
         password: ''
@@ -34,44 +35,48 @@ function Login(mostrarlogin) {
             if (response.data[0].email == user.email && response.data[0].password == user.password) {
                 localStorage.setItem("email", user.email)
                 localStorage.setItem("name", response.data[0].name)
-
+                navigate('/main')
             } else {
                 handleClick();
             }
 
         }).catch(error => handleClick())
     }
+    
     return (
-        <div className="login">
-            <div className="caixa">
-                <h1 id="P">ProCad</h1>
-                <h1>Login</h1>
+        <div className="tela">
+            <div className="login">
+                <div className="caixa">
+                    <h1 id="P">ProCad</h1>
+                    <h1>Login</h1>
+                </div>
+                <label>
+                    Email:
+                    <input
+                        type="text"
+                        name="email"
+                        value={user.email}
+                        onChange={changeInput}
+                        required
+                    />
+                </label>
+                <label>
+                    Password:
+                    <input
+                        type="password"
+                        name="password"
+                        value={user.password}
+                        onChange={changeInput}
+                        required
+                    />
+                </label>
+                {mostrarPopup && (
+                    <Popup mostrar={mostrarPopup} fecharPopup={fecharPopup} />)
+                }
+                <input type="button" value="Submit" onClick={enviarReq} />
+                <Link className="link-button" to={'/Cadastrar'}>Cadastre-se</Link>
+                <Footer/>
             </div>
-            <label>
-                Email:
-                <input
-                    type="text"
-                    name="email"
-                    value={user.email}
-                    onChange={changeInput}
-                    required
-                />
-            </label>
-            <label>
-                Password:
-                <input
-                    type="text"
-                    name="password"
-                    value={user.password}
-                    onChange={changeInput}
-                    required
-                />
-            </label>
-            {mostrarPopup && (
-                <Popup mostrar={mostrarPopup} fecharPopup={fecharPopup} />)
-            }
-            <input type="button" value="Submit" onClick={enviarReq} />
-            <Link className="link-button" to={'/Cadastrar'}>Cadastre-se</Link>
         </div>
 
     )

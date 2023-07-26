@@ -1,6 +1,6 @@
 // Produtos.jsx
 import React, { useState, useEffect } from "react";
-import Main from "./Main";
+import Main from "../Basic/NavBar";
 import "./Produtos.css";
 import axios from "axios";
 

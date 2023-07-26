@@ -22,18 +22,22 @@ function Cadastro() {
             [name]: value
         }));
     };
-
+    
     const [mostrarPopup, setMostrarPopup] = useState(false);
     const handleClick = () => {
         setMostrarPopup(true);
     };
-
+    
     const fecharPopup = () => {
         setMostrarPopup(false);
     };
-
+    
     const handleSubmit = (e) => {
         e.preventDefault();
+        if(formData.password.length < 8){
+            setMostrarPopup(true)
+            return;
+        }
         axios.post('http://localhost:8080/users', formData).then(response =>{
             console.log(response)
         })
@@ -42,7 +46,7 @@ function Cadastro() {
     };
 
     return (
-        <div className="App">
+        <div className="tela">
             <form className="form-cadastro" onSubmit={handleSubmit}>
                 <div className="caixa">
                     <h1 id="P">ProCad</h1>
@@ -95,8 +99,8 @@ function Cadastro() {
                     <Popup mostrar={mostrarPopup} fecharPopup={fecharPopup} />)
                 }
                 <button type="submit">Cadastrar</button>
-            </form>
             <Footer/>
+            </form>
         </div>
     );
 }

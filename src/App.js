@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import './App.css';
-import Main from './Components/Layouts/Main'
+import Inicial from './Components/Layouts/Inicial';
 import Login from './Components/Layouts/Login'
 import Cadastro from './Components/Layouts/Cadastro';
 import CadProduto from './Components/Layouts/CadProduto';
@@ -15,7 +15,7 @@ function App() {
       <Routes>
         <Route path='/' element={<Login/>}/>
         <Route path='/cadastrar' element={<Cadastro/>}/>
-        <Route path='/main' element={<Main/>}/>
+        <Route path='/main' element={<Inicial/>}/>
         <Route path='/cadProduto' element={<CadProduto />}/>
         <Route path='/produtos' element={<Produtos />}/>
       </Routes>

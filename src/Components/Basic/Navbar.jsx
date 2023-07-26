@@ -1,25 +1,35 @@
-import React from 'react'
-import { Link } from 'react-router-dom';
-import './Navbar.css'
+import React from "react";
+import { Link, Navigate, useNavigate } from "react-router-dom";
+import './NavBar.css'
 
-function Navbar() {
+function Main() {
+    const nome = localStorage.getItem('name').toString();
+    const nomeUsuario = nome.split(' ')[0];
+    const navigate = useNavigate();
+
+    const handleLogout = () => {
+        console.log(nome)
+        localStorage.removeItem('name')
+        localStorage.removeItem('email')
+
+        navigate('/')
+    };
+
     return (
-        <nav className='navbar'>
-            <ul>
-                <li>
-                    <Link className='link' to={'/Produtos'}>Produtos</Link>
-
-                </li>
-                <li>
-                    <Link className='link' to={'/'}>Pedidos</Link>
-
-                </li>
-                <li>
-                    <Link className='link' to={'/'}>Sair</Link>
-                </li>
-            </ul>
-        </nav>
-    );
+        <div className="in">
+            <nav class="navbar">
+                <div className="user-info">
+                    Bem-vindo, {nomeUsuario}!
+                </div>
+                <ul class="nav-list">
+                    <li class="nav-item"><Link className="link" to={'/produtos'}>Catálogo</Link></li>
+                    <li class="nav-item"><Link className="link" to={'/cadProduto'}>Cad.Produtos</Link></li>
+                    <li class="nav-item"><Link className="link" to={'/pedidos'}>Pedidos</Link></li>
+                </ul>
+                <button className="logout-button" onClick={handleLogout}>Sair</button>
+            </nav>
+        </div>
+    )
 }
 
-export default Navbar;
+export default Main;

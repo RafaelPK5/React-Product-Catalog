@@ -1,17 +1,16 @@
 import React, { useState } from "react";
-import axios from 'axios'
+import axios from 'axios';
 import Popup from "../Basic/PopUp";
-import './Login.css'
+import './Login.css';
 import { Link, useNavigate } from "react-router-dom";
 import Footer from "../Basic/Footer";
 
-function Login(mostrarlogin) {
-    if (!mostrarlogin) return null;
-    const navigate = useNavigate()
+function Login() {
+    const navigate = useNavigate();
     const [user, setUser] = useState({
         email: '',
         password: ''
-    })
+    });
 
     const [mostrarPopup, setMostrarPopup] = useState(false);
 
@@ -24,25 +23,31 @@ function Login(mostrarlogin) {
     };
 
     const changeInput = (e) => {
-        const { name, value } = e.target
-        setUser({ ...user, [name]: value })
-        setMostrarPopup(false)
-    }
+        const { name, value } = e.target;
+        setUser({ ...user, [name]: value });
+        setMostrarPopup(false);
+    };
 
     const enviarReq = (e) => {
         axios.get('http://localhost:8080/users').then(response => {
-            console.log(response.data[0])
-            if (response.data[0].email == user.email && response.data[0].password == user.password) {
-                localStorage.setItem("email", user.email)
-                localStorage.setItem("name", response.data[0].name)
-                navigate('/main')
+            console.log(response.data[0]);
+            if (response.data[0].email === user.email && response.data[0].password === user.password) {
+                localStorage.setItem("email", user.email);
+                localStorage.setItem("name", response.data[0].name);
+                navigate('/main');
             } else {
                 handleClick();
             }
 
-        }).catch(error => handleClick())
-    }
-    
+        }).catch(error => handleClick());
+    };
+
+    const apertarEnter = (e) => {
+        if (e.key === "Enter") {
+            enviarReq();
+        }
+    };
+
     return (
         <div className="tela">
             <div className="login">
@@ -67,6 +72,7 @@ function Login(mostrarlogin) {
                         name="password"
                         value={user.password}
                         onChange={changeInput}
+                        onKeyDown={apertarEnter}
                         required
                     />
                 </label>
@@ -75,10 +81,9 @@ function Login(mostrarlogin) {
                 }
                 <input type="button" value="Submit" onClick={enviarReq} />
                 <Link className="link-button" to={'/Cadastrar'}>Cadastre-se</Link>
-                <Footer/>
+                <Footer />
             </div>
         </div>
-
     )
 }
 
